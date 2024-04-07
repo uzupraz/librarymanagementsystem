@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Apr 05, 2024 at 05:06 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Host: localhost
+-- Generation Time: Apr 07, 2024 at 11:17 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,204 +24,282 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `activesubscriptions`
+-- Table structure for table `ActiveSubscriptions`
 --
 
-CREATE TABLE `activesubscriptions` (
-  `UserID` int(30) NOT NULL,
-  `SubID` int(30) NOT NULL,
-  `StartDate` int(30) NOT NULL,
-  `EndDate` int(30) NOT NULL
+CREATE TABLE `ActiveSubscriptions` (
+  `userid` int(11) DEFAULT NULL,
+  `subid` int(11) DEFAULT NULL,
+  `startdate` date DEFAULT NULL,
+  `enddate` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `ActiveSubscriptions`
+--
+
+INSERT INTO `ActiveSubscriptions` (`userid`, `subid`, `startdate`, `enddate`) VALUES
+(1, 1, '2024-01-01', '2024-01-31'),
+(2, 2, '2024-01-01', '2024-12-31');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `author`
+-- Table structure for table `Books`
 --
 
-CREATE TABLE `author` (
-  `AuthorName` varchar(255) NOT NULL,
-  `BookID` int(10) NOT NULL,
-  `AuthorID` int(10) NOT NULL
+CREATE TABLE `Books` (
+  `bookid` int(11) NOT NULL,
+  `bookname` varchar(255) NOT NULL,
+  `author` varchar(255) DEFAULT NULL,
+  `publisher` varchar(255) DEFAULT NULL,
+  `publishdate` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `Books`
+--
+
+INSERT INTO `Books` (`bookid`, `bookname`, `author`, `publisher`, `publishdate`) VALUES
+(1, 'The Great Gatsby', 'F. Scott Fitzgerald', 'Scribner', '1925-04-10'),
+(2, 'To Kill a Mockingbird', 'Harper Lee', 'J. B. Lippincott & Co.', '1960-07-11');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `books`
+-- Table structure for table `Category`
 --
 
-CREATE TABLE `books` (
-  `BookID` int(10) NOT NULL,
-  `BookName` varchar(255) NOT NULL,
-  `Author` varchar(255) NOT NULL,
-  `Categories` varchar(255) NOT NULL,
-  `Publisher` varchar(255) NOT NULL,
-  `PublishedDate` int(20) NOT NULL
+CREATE TABLE `Category` (
+  `categoryid` int(11) NOT NULL,
+  `categoryname` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `Category`
+--
+
+INSERT INTO `Category` (`categoryid`, `categoryname`) VALUES
+(1, 'Classic'),
+(2, 'Fiction');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `category`
+-- Table structure for table `CategoryMap`
 --
 
-CREATE TABLE `category` (
-  `CategoryID` int(10) NOT NULL,
-  `CategoryName` varchar(255) NOT NULL
+CREATE TABLE `CategoryMap` (
+  `bookid` int(11) DEFAULT NULL,
+  `categoryid` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `CategoryMap`
+--
+
+INSERT INTO `CategoryMap` (`bookid`, `categoryid`) VALUES
+(1, 1),
+(2, 2);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categorymap`
+-- Table structure for table `LentBooks`
 --
 
-CREATE TABLE `categorymap` (
-  `BookID` int(10) NOT NULL,
-  `CategoryID` int(10) NOT NULL
+CREATE TABLE `LentBooks` (
+  `bookid` int(11) DEFAULT NULL,
+  `userid` int(11) DEFAULT NULL,
+  `lenddate` date DEFAULT NULL,
+  `returndate` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `LentBooks`
+--
+
+INSERT INTO `LentBooks` (`bookid`, `userid`, `lenddate`, `returndate`) VALUES
+(1, 1, '2024-02-01', '2024-02-15'),
+(2, 2, '2024-03-01', '2024-03-15');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `lentbooks`
+-- Table structure for table `LoginDetails`
 --
 
-CREATE TABLE `lentbooks` (
-  `BookID` int(30) NOT NULL,
-  `UserID` int(30) NOT NULL,
-  `LentDate` int(30) NOT NULL,
-  `ReturnDate` int(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `login_details`
---
-
-CREATE TABLE `login_details` (
-  `UserID` int(22) NOT NULL,
+CREATE TABLE `LoginDetails` (
+  `userid` int(11) NOT NULL,
   `Email` varchar(255) NOT NULL,
-  `Password` varchar(255) NOT NULL
+  `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `login_details`
+-- Dumping data for table `LoginDetails`
 --
 
-INSERT INTO `login_details` (`UserID`, `Email`, `Password`) VALUES
-(1, 'anushka@gmail.com', 'anushka123'),
-(2, 'uzzu4456@gmail.com', 'uzzu123');
+INSERT INTO `LoginDetails` (`userid`, `Email`, `password`) VALUES
+(1, 'user1@example.com', 'pass1'),
+(2, 'user2@example.com', 'pass2');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `subscriptiontype`
+-- Table structure for table `SubscriptionType`
 --
 
-CREATE TABLE `subscriptiontype` (
-  `SubID` int(10) NOT NULL,
-  `SubName` varchar(255) NOT NULL
+CREATE TABLE `SubscriptionType` (
+  `subid` int(11) NOT NULL,
+  `subname` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `SubscriptionType`
+--
+
+INSERT INTO `SubscriptionType` (`subid`, `subname`) VALUES
+(1, 'Monthly'),
+(2, 'Yearly');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `totalbooks`
+-- Table structure for table `TotalBooks`
 --
 
-CREATE TABLE `totalbooks` (
-  `BookID` int(30) NOT NULL,
-  `TotalNumber` int(30) NOT NULL
+CREATE TABLE `TotalBooks` (
+  `bookid` int(11) DEFAULT NULL,
+  `totalnumber` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `TotalBooks`
+--
+
+INSERT INTO `TotalBooks` (`bookid`, `totalnumber`) VALUES
+(1, 3),
+(2, 5);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_details`
+-- Table structure for table `UserDetails`
 --
 
-CREATE TABLE `user_details` (
-  `UserID` int(20) DEFAULT NULL,
+CREATE TABLE `UserDetails` (
+  `userid` int(11) NOT NULL,
   `FullName` varchar(255) NOT NULL,
-  `Address` varchar(255) NOT NULL,
-  `DOB` int(20) NOT NULL,
-  `Gender` varchar(255) NOT NULL,
-  `Email` varchar(255) NOT NULL
+  `Address` varchar(255) DEFAULT NULL,
+  `DateOfBirth` date DEFAULT NULL,
+  `Gender` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `UserDetails`
+--
+
+INSERT INTO `UserDetails` (`userid`, `FullName`, `Address`, `DateOfBirth`, `Gender`) VALUES
+(1, 'John Doe', '123 Elm Street', '1985-05-15', 'Male'),
+(2, 'Jane Smith', '456 Oak Avenue', '1990-08-20', 'Female');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `activesubscriptions`
+-- Indexes for table `ActiveSubscriptions`
 --
-ALTER TABLE `activesubscriptions`
-  ADD PRIMARY KEY (`UserID`);
+ALTER TABLE `ActiveSubscriptions`
+  ADD KEY `userid` (`userid`),
+  ADD KEY `subid` (`subid`);
 
 --
--- Indexes for table `author`
+-- Indexes for table `Books`
 --
-ALTER TABLE `author`
-  ADD PRIMARY KEY (`AuthorID`),
-  ADD KEY `fk_bookid` (`BookID`);
+ALTER TABLE `Books`
+  ADD PRIMARY KEY (`bookid`);
 
 --
--- Indexes for table `books`
+-- Indexes for table `Category`
 --
-ALTER TABLE `books`
-  ADD PRIMARY KEY (`BookID`);
+ALTER TABLE `Category`
+  ADD PRIMARY KEY (`categoryid`);
 
 --
--- Indexes for table `category`
+-- Indexes for table `CategoryMap`
 --
-ALTER TABLE `category`
-  ADD KEY `fk_category_categoryid` (`CategoryID`);
+ALTER TABLE `CategoryMap`
+  ADD KEY `bookid` (`bookid`),
+  ADD KEY `categoryid` (`categoryid`);
 
 --
--- Indexes for table `categorymap`
+-- Indexes for table `LentBooks`
 --
-ALTER TABLE `categorymap`
-  ADD PRIMARY KEY (`BookID`),
-  ADD KEY `fk_categoryid` (`CategoryID`);
+ALTER TABLE `LentBooks`
+  ADD KEY `bookid` (`bookid`),
+  ADD KEY `userid` (`userid`);
 
 --
--- Indexes for table `login_details`
+-- Indexes for table `LoginDetails`
 --
-ALTER TABLE `login_details`
-  ADD PRIMARY KEY (`UserID`);
+ALTER TABLE `LoginDetails`
+  ADD PRIMARY KEY (`userid`);
 
 --
--- Indexes for table `user_details`
+-- Indexes for table `SubscriptionType`
 --
-ALTER TABLE `user_details`
-  ADD KEY `fk_user_details_login` (`UserID`);
+ALTER TABLE `SubscriptionType`
+  ADD PRIMARY KEY (`subid`);
+
+--
+-- Indexes for table `TotalBooks`
+--
+ALTER TABLE `TotalBooks`
+  ADD KEY `bookid` (`bookid`);
+
+--
+-- Indexes for table `UserDetails`
+--
+ALTER TABLE `UserDetails`
+  ADD PRIMARY KEY (`userid`);
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `author`
+-- Constraints for table `ActiveSubscriptions`
 --
-ALTER TABLE `author`
-  ADD CONSTRAINT `fk_bookid` FOREIGN KEY (`BookID`) REFERENCES `books` (`BookID`);
+ALTER TABLE `ActiveSubscriptions`
+  ADD CONSTRAINT `activesubscriptions_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `UserDetails` (`userid`),
+  ADD CONSTRAINT `activesubscriptions_ibfk_2` FOREIGN KEY (`subid`) REFERENCES `SubscriptionType` (`subid`);
 
 --
--- Constraints for table `category`
+-- Constraints for table `CategoryMap`
 --
-ALTER TABLE `category`
-  ADD CONSTRAINT `fk_category_categoryid` FOREIGN KEY (`CategoryID`) REFERENCES `categorymap` (`CategoryID`);
+ALTER TABLE `CategoryMap`
+  ADD CONSTRAINT `categorymap_ibfk_1` FOREIGN KEY (`bookid`) REFERENCES `Books` (`bookid`),
+  ADD CONSTRAINT `categorymap_ibfk_2` FOREIGN KEY (`categoryid`) REFERENCES `Category` (`categoryid`);
 
 --
--- Constraints for table `user_details`
+-- Constraints for table `LentBooks`
 --
-ALTER TABLE `user_details`
-  ADD CONSTRAINT `fk_user_details_login` FOREIGN KEY (`UserID`) REFERENCES `login_details` (`UserID`);
+ALTER TABLE `LentBooks`
+  ADD CONSTRAINT `lentbooks_ibfk_1` FOREIGN KEY (`bookid`) REFERENCES `Books` (`bookid`),
+  ADD CONSTRAINT `lentbooks_ibfk_2` FOREIGN KEY (`userid`) REFERENCES `UserDetails` (`userid`);
+
+--
+-- Constraints for table `TotalBooks`
+--
+ALTER TABLE `TotalBooks`
+  ADD CONSTRAINT `totalbooks_ibfk_1` FOREIGN KEY (`bookid`) REFERENCES `Books` (`bookid`);
+
+--
+-- Constraints for table `UserDetails`
+--
+ALTER TABLE `UserDetails`
+  ADD CONSTRAINT `userdetails_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `LoginDetails` (`userid`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
