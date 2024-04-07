@@ -1,0 +1,111 @@
+/* Reset default styles and apply base styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+  }
+  
+  /* Sidebar Styles */
+  .sidebar {
+    width: 250px;
+    height: 100%;
+    background-color: #CCE0FF;
+    padding: 20px;
+    position: fixed;
+  }
+  
+  .logo {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .logo img {
+    width: 70px;
+    margin-bottom: 10px;
+  }
+  
+  .logo h2 {
+    margin: 0;
+    font-size: 20px;
+    color: #000000;
+    font-family: Georgia;
+    vertical-align: middle;
+    margin-left: 10px;
+  }
+  
+  .sidebar button {
+    display: block;
+    width: 100%;
+    padding: 20px;
+    margin-top: 75px;
+    margin-bottom: 20px;
+    border: none;
+    background-color: #e6edf8;
+    color: #000000;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .sidebar button:hover {
+    background-color: #95bcff;
+  }
+  
+  /* Content Area Styles */
+  .content {
+    margin-left: 250px; /* Adjusted to accommodate sidebar */
+    padding: 20px;
+  }
+  
+  .content h1 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .line {
+    border-top: 1px solid #a8a8a8;
+    margin-top: 20px;
+  }
+  
+  .stats {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 30px;
+  }
+  
+  .stat-box {
+    flex: 1;
+    max-width: 200px; 
+    padding: 60px;
+    text-align: center;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    background-color: #CCE0FF;
+    margin: 10px;
+  }
+  
+  .stat-box:hover {
+    background-color: #95bcff;
+  }
+  
+  .stat-box p {
+    margin: 0;
+    font-size: 15px;
+    font-weight: bold;
+  }
+  .books-container {
+    margin-top: 20px;
+}
+
+.book-item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+  
