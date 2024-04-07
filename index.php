@@ -31,7 +31,7 @@ include "db_conn.php";
     </div>';
     }
     ?>
-    <a href="add-new.php" class="btn btn-dark mb-3">Add Book</a>
+    <a href="admin.php" class="btn btn-dark mb-3">Add Book</a>
 
     <table class="table table-hover text-center">
       <thead class="table-dark">
