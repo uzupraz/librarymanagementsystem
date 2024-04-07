@@ -7,6 +7,7 @@ if (isset($_POST["submit"])) {
    $publisher = $_POST['publisher'];
    $publish_date = $_POST['publish_date'];
 
+   
    $sql = "INSERT INTO `crud`(`book_name`, `book_author`, `publisher`, `publish_date`) VALUES ('$book_name','$book_author','$publisher','$publish_date')";
 
    $result = mysqli_query($conn, $sql);
