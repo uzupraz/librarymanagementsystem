@@ -10,7 +10,7 @@ $mysqli = mysqli_connect($servername, $username, $password, $dbname);
 
 // Check connection
 if ($mysqli) {
-    echo "Connection Successful";
+    // echo "Connection Successful";
 } else {
     die("Connection failed: " . mysqli_connect_error());
 }
