@@ -21,6 +21,12 @@ include "connection.php";
 
 <body>
  
+<button class="btn btn-primary" onclick="goBack()">Back</button>
+    <script>
+      function goBack() {
+        window.history.back();
+      }
+    </script>
   <div class="container">
     <?php
     if (isset($_GET["msg"])) {
@@ -31,7 +37,7 @@ include "connection.php";
     </div>';
     }
     ?>
-    <a href="admin.php" class="btn btn-dark mb-3">Add Book</a>
+    <a href="book_admin.php" class="btn btn-dark mb-3">Add Book</a>
 
     <table class="table table-hover text-center">
       <thead class="table-dark">

@@ -42,6 +42,12 @@ if (isset($_POST["submit"])) {
 
 <body>
  
+<button class="btn btn-primary" onclick="goBack()">Back</button>
+    <script>
+      function goBack() {
+        window.history.back();
+      }
+    </script>
 
    <div class="container">
       <div class="text-center mb-4" style="background-color: #00ff5573;">

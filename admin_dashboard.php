@@ -61,7 +61,7 @@ include 'connection.php';
         }
 
         function TotalBooksPage() {
-            window.location.href = "book_admin.php";
+            window.location.href = "book_index.php";
         }
         function logout() {
             window.location.href = "login.php"; // Redirect to login page

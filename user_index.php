@@ -22,6 +22,12 @@ include "connection.php";
 <body>
   <nav class="navbar navbar-light justify-content-center fs-3 mb-5" style="background-color: #00ff5573;">
     User Details
+    <button class="btn btn-primary" onclick="goBack()">Back</button>
+    <script>
+      function goBack() {
+        window.history.back();
+      }
+    </script>
   </nav>
 
   <div class="container">
@@ -34,7 +40,7 @@ include "connection.php";
     </div>';
     }
     ?>
-    <a href="user_add.php" class="btn btn-dark mb-3">Add New</a>
+    <a href="add_user_form.html" class="btn btn-dark mb-3">Add New</a>
 
     <table class="table table-hover text-center">
       <thead class="table-dark">
