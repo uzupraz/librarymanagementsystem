@@ -31,6 +31,7 @@ if (isset($_POST["submit"])) {
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="a_dashboard.css">
 
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
@@ -45,6 +46,33 @@ if (isset($_POST["submit"])) {
   <nav class="navbar navbar-light justify-content-center fs-3 mb-5" style="background-color: #00ff5573;">
     User Details
   </nav>
+  <div class="sidebar">
+        <div class="logo">
+            <img src="logo.png" alt="Librify Logo">
+            <h2>Librify</h2>
+        </div>
+        <button onclick="showTotalUsersPage()" class="sidebar-btn">Users</button>
+        <button onclick="TotalBooksPage()" class="sidebar-btn">Books</button>
+        <button onclick="showSubscriptionUsers()" class="sidebar-btn">Subscription User</button>
+        <button onclick="logout()" class="sidebar-btn">Logout</button>
+        
+    </div> 
+    <script>
+         function showTotalUsersPage() {
+            window.location.href = "user_index.php";
+        }
+
+        function TotalBooksPage() {
+            window.location.href = "book_index.php";
+        }
+        function logout() {
+            window.location.href = "login.php"; // Redirect to login page
+        }
+
+        function showTotalBooks(){
+          window.location.href = "bookshow.php"
+        }
+    </script>
 
   <div class="container">
     <div class="text-center mb-4">

@@ -15,11 +15,29 @@ include "connection.php";
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="a_dashboard.css">
 
   <title>PHP BOOKS Application</title>
 </head>
 
 <body>
+
+    <script>
+         function showTotalUsersPage() {
+            window.location.href = "user_index.php";
+        }
+
+        function TotalBooksPage() {
+            window.location.href = "book_index.php";
+        }
+        function logout() {
+            window.location.href = "login.php"; // Redirect to login page
+        }
+
+        function showTotalBooks(){
+          window.location.href = "bookshow.php"
+        }
+    </script>
  
 <button class="btn btn-primary" onclick="goBack()">Back</button>
     <script>
@@ -28,6 +46,17 @@ include "connection.php";
       }
     </script>
   <div class="container">
+  <div class="sidebar">
+        <div class="logo">
+            <img src="logo.png" alt="Librify Logo">
+            <h2>Librify</h2>
+        </div>
+        <button onclick="showTotalUsersPage()" class="sidebar-btn">Users</button>
+        <button onclick="TotalBooksPage()" class="sidebar-btn">Books</button>
+        <button onclick="showSubscriptionUsers()" class="sidebar-btn">Subscription User</button>
+        <button onclick="logout()" class="sidebar-btn">Logout</button>
+        
+    </div> 
     <?php
     if (isset($_GET["msg"])) {
       $msg = $_GET["msg"];
@@ -39,7 +68,7 @@ include "connection.php";
     ?>
     <a href="book_admin.php" class="btn btn-dark mb-3">Add Book</a>
 
-    <table class="table table-hover text-center">
+    <table class="table text-center">
       <thead class="table-dark">
         <tr>
           <th scope="col">Book Name</th>

@@ -34,6 +34,7 @@ if (isset($_POST["submit"])) {
 
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <link rel="stylesheet" href="a_dashboard.css">
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -42,11 +43,39 @@ if (isset($_POST["submit"])) {
 </head>
 
 <body>
+
   <nav class="navbar navbar-light justify-content-center fs-3 mb-5" style="background-color: #00ff5573;">
     PHP Complete BOOKS Application
   </nav>
 
   <div class="container">
+  <div class="sidebar">
+        <div class="logo">
+            <img src="logo.png" alt="Librify Logo">
+            <h2>Librify</h2>
+        </div>
+        <button onclick="showTotalUsersPage()" class="sidebar-btn">Users</button>
+        <button onclick="TotalBooksPage()" class="sidebar-btn">Books</button>
+        <button onclick="showSubscriptionUsers()" class="sidebar-btn">Subscription User</button>
+        <button onclick="logout()" class="sidebar-btn">Logout</button>
+        
+    </div> 
+    <script>
+         function showTotalUsersPage() {
+            window.location.href = "user_index.php";
+        }
+
+        function TotalBooksPage() {
+            window.location.href = "book_index.php";
+        }
+        function logout() {
+            window.location.href = "login.php"; // Redirect to login page
+        }
+
+        function showTotalBooks(){
+          window.location.href = "bookshow.php"
+        }
+    </script>
     <div class="text-center mb-4">
       <h3>Edit User Information</h3>
       <p class="text-muted">Click update after changing any information</p>
@@ -58,7 +87,7 @@ if (isset($_POST["submit"])) {
     $row = mysqli_fetch_assoc($result);
     ?>
 
-    <div class="container d-flex justify-content-center">
+    <div class="container d-flex">
       <form action="" method="post" style="width:50vw; min-width:300px;">
         <div class="row mb-3">
           <div class="col">
