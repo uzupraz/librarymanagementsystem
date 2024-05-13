@@ -3,7 +3,7 @@ include "connection.php";
 
 if(isset($_GET['search'])) {
   $search = $_GET['search'];
-  $search_query = "SELECT * FROM `books` WHERE `bookname` LIKE '$search%' LIMIT 10";
+  $search_query = "SELECT * FROM `books` WHERE `bookname` LIKE '%$search%' LIMIT 10";
   $search_result = mysqli_query($mysqli, $search_query);
   if(mysqli_num_rows($search_result) > 0) {
     echo "<ul class='list-group'>";
