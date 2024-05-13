@@ -37,72 +37,7 @@ if (isset($_POST["submit"])) {
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <style>
-    .error {
-      color: red;
-      display: none;
-    }
 
-    .input-error {
-      border-color: red;
-    }
-  </style>
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      const submitButton = document.getElementById("submit");
-      const fullName = document.getElementsByName("FullName")[0];
-      const address = document.getElementsByName("Address")[0];
-      const dateOfBirth = document.getElementsByName("DateOfBirth")[0];
-
-
-      function validateFullName(name) {
-        return name.includes(' ') && name.length >= 4;
-      }
-
-      function calculateAge(dateOfBirth) {
-        const birthDate = new Date(dateOfBirth);
-        const today = new Date();
-        const age = today.getFullYear() - birthDate.getFullYear();
-        const m = today.getMonth() - birthDate.getMonth();
-        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-          return age - 1;
-        }
-        return age;
-      }
-
-      function displayError(input, isValid, message) {
-        const errorDiv = input.nextElementSibling;
-        if (input.value.trim() !== "") { // Only display errors if the user has interacted with the field
-          if (!isValid) {
-            input.classList.add("input-error");
-            errorDiv.textContent = message;
-            errorDiv.style.display = 'block';
-          } else {
-            input.classList.remove("input-error");
-            errorDiv.style.display = 'none';
-          }
-        }
-      }
-
-      function updateSubmitButtonState() {
-        const isFullNameValid = validateFullName(fullName.value);
-        const isAddressValid = address.value.length >= 4;
-        const isAgeValid = calculateAge(dateOfBirth.value) > 8;
-
-
-        displayError(fullName, isFullNameValid, "Full name must include at least one space and be at least 4 characters.");
-        displayError(address, isAddressValid, "Address must be at least 4 characters long.");
-        displayError(dateOfBirth, isAgeValid, "User must be over 8 years old.");
-
-      }
-
-      fullName.addEventListener("input", updateSubmitButtonState);
-      address.addEventListener("input", updateSubmitButtonState);
-      dateOfBirth.addEventListener("change", updateSubmitButtonState);
-
-      updateSubmitButtonState(); // Initial check on page load
-    });
-  </script>
   <title>User Details</title>
 </head>
 
@@ -128,29 +63,27 @@ if (isset($_POST["submit"])) {
         <div class="row mb-3">
           <div class="col">
             <label class="form-label">Full Name:</label>
-            <input type="text" class="form-control" name="FullName" placeholder="John Abraham" value="<?php echo htmlspecialchars($row['FullName']); ?>" required>
-            <div class="error"></div>
+            <input type="text" class="form-control" name="FullName" value="<?php echo $row['FullName'] ?>">
           </div>
+
           <div class="col">
-            <label class="form-label">Date of Birth:</label>
-            <input type="date" class="form-control" name="DateOfBirth" value="<?php echo htmlspecialchars($row['DateOfBirth']); ?>" required>
-            <div class="error"></div>
+            <label class="form-label">DateOfBirth:</label>
+            <input type="date" class="form-control" name="DateOfBirth" value="<?php echo $row['DateOfBirth'] ?>">
           </div>
         </div>
 
         <div class="mb-3">
           <label class="form-label">Address:</label>
-          <input type="text" class="form-control" name="Address" value="<?php echo htmlspecialchars($row['Address']); ?>" required>
-          <div class="error"></div>
+          <input type="Address" class="form-control" name="Address" value="<?php echo $row['Address'] ?>">
         </div>
 
         <div class="form-group mb-3">
           <label>Gender:</label>
           &nbsp;
-          <input type="radio" class="form-check-input" name="Gender" id="male" value="Male" <?php echo ($row['Gender'] == 'Male') ? 'checked' : ''; ?> required>
+          <input type="radio" class="form-check-input" name="Gender" id="male" value="male" <?php echo ($row["Gender"] == 'male') ? "checked" : ""; ?>>
           <label for="male" class="form-input-label">Male</label>
           &nbsp;
-          <input type="radio" class="form-check-input" name="Gender" id="female" value="Female" <?php echo ($row['Gender'] == 'Female') ? 'checked' : ''; ?> required>
+          <input type="radio" class="form-check-input" name="Gender" id="female" value="female" <?php echo ($row["Gender"] == 'female') ? "checked" : ""; ?>>
           <label for="female" class="form-input-label">Female</label>
         </div>
 
@@ -160,7 +93,6 @@ if (isset($_POST["submit"])) {
         </div>
       </form>
     </div>
-
   </div>
 
   <!-- Bootstrap -->

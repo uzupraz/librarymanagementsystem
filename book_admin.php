@@ -72,16 +72,6 @@ if (isset($_POST["submit"])) {
                <input type="date" class="form-control" name="publish_date" placeholder="Asmita Publication">
             </div>
 
-            <!-- <div class="form-group mb-3">
-               <label>publish_date:</label>
-               &nbsp;
-               <input type="radio" class="form-check-input" name="publish_date" id="male" value="male">
-               <label for="male" class="form-input-label">Male</label>
-               &nbsp;
-               <input type="radio" class="form-check-input" name="publish_date" id="female" value="female">
-               <label for="female" class="form-input-label">Female</label>
-            </div> -->
-
             <div>
                <button type="submit" class="btn btn-success" name="submit">Save</button>
                <a href="book_index.php" class="btn btn-danger">Cancel</a>
@@ -90,7 +80,6 @@ if (isset($_POST["submit"])) {
       </div>
    </div>
 
-   <!-- Bootstrap -->
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 
 </body>

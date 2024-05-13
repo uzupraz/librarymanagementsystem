@@ -18,15 +18,16 @@ include 'connection.php';
             <h2>Librify</h2>
         </div>
         <button onclick="showTotalUsersPage()" class="sidebar-btn">Users</button>
-        <button onclick="showTotalBooksPage()" class="sidebar-btn">Books</button>
+        <button onclick="TotalBooksPage()" class="sidebar-btn">Books</button>
         <button onclick="showSubscriptionUsers()" class="sidebar-btn">Subscription User</button>
         <button onclick="logout()" class="sidebar-btn">Logout</button>
+        
     </div>      
     <div class="content">
         <h1>Welcome to Admin Dashboard</h1>
         <div class="line"></div>
         <div class="stats">
-          <button onclick="showTotalUsers()" class="stat-box">
+        <button onclick="showTotalUsersPage()" class="stat-box">
             <p>Total Users</p>
             <span id="totalUsers">0</span>
           </button>
@@ -55,12 +56,19 @@ include 'connection.php';
 
     <script src="a_dashboard.js"></script>
     <script>
-        function showTotalUsersPage() {
+         function showTotalUsersPage() {
             window.location.href = "user_index.php";
         }
-        
-        function showTotalBooksPage() {
+
+        function TotalBooksPage() {
             window.location.href = "book_admin.php";
+        }
+        function logout() {
+            window.location.href = "login.php"; // Redirect to login page
+        }
+
+        function showTotalBooks(){
+          window.location.href = "bookshow.php"
         }
     </script>
 </body>

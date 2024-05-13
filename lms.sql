@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 11, 2024 at 06:42 PM
+-- Generation Time: Apr 07, 2024 at 11:17 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -28,11 +28,19 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `ActiveSubscriptions` (
-  `userid` int(11) NOT NULL,
+  `userid` int(11) DEFAULT NULL,
   `subid` int(11) DEFAULT NULL,
   `startdate` date DEFAULT NULL,
   `enddate` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `ActiveSubscriptions`
+--
+
+INSERT INTO `ActiveSubscriptions` (`userid`, `subid`, `startdate`, `enddate`) VALUES
+(1, 1, '2024-01-01', '2024-01-31'),
+(2, 2, '2024-01-01', '2024-12-31');
 
 -- --------------------------------------------------------
 
@@ -184,18 +192,16 @@ CREATE TABLE `UserDetails` (
   `FullName` varchar(255) NOT NULL,
   `Address` varchar(255) DEFAULT NULL,
   `DateOfBirth` date DEFAULT NULL,
-  `Gender` varchar(50) DEFAULT NULL,
-  `isSubscribed` int(2) DEFAULT 0,
-  `isDeleted` int(2) DEFAULT 0
+  `Gender` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `UserDetails`
 --
 
-INSERT INTO `UserDetails` (`userid`, `FullName`, `Address`, `DateOfBirth`, `Gender`, `isSubscribed`, `isDeleted`) VALUES
-(1, 'John Doe', '123 Elm Street', '1985-05-15', 'Male', 0, 0),
-(2, 'Jane Smith', '456 Oak Avenue', '1990-08-20', 'Female', 0, 0);
+INSERT INTO `UserDetails` (`userid`, `FullName`, `Address`, `DateOfBirth`, `Gender`) VALUES
+(1, 'John Doe', '123 Elm Street', '1985-05-15', 'Male'),
+(2, 'Jane Smith', '456 Oak Avenue', '1990-08-20', 'Female');
 
 --
 -- Indexes for dumped tables
@@ -205,8 +211,8 @@ INSERT INTO `UserDetails` (`userid`, `FullName`, `Address`, `DateOfBirth`, `Gend
 -- Indexes for table `ActiveSubscriptions`
 --
 ALTER TABLE `ActiveSubscriptions`
-  ADD KEY `subid` (`subid`),
-  ADD KEY `activesubscriptions_ibfk_1` (`userid`);
+  ADD KEY `userid` (`userid`),
+  ADD KEY `subid` (`subid`);
 
 --
 -- Indexes for table `Books`
@@ -256,17 +262,7 @@ ALTER TABLE `TotalBooks`
 -- Indexes for table `UserDetails`
 --
 ALTER TABLE `UserDetails`
-  ADD PRIMARY KEY (`userid`) USING BTREE;
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `UserDetails`
---
-ALTER TABLE `UserDetails`
-  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  ADD PRIMARY KEY (`userid`);
 
 --
 -- Constraints for dumped tables
@@ -276,33 +272,34 @@ ALTER TABLE `UserDetails`
 -- Constraints for table `ActiveSubscriptions`
 --
 ALTER TABLE `ActiveSubscriptions`
-  ADD CONSTRAINT `activesubscriptions_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `UserDetails` (`userid`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `activesubscriptions_ibfk_2` FOREIGN KEY (`subid`) REFERENCES `SubscriptionType` (`subid`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `activesubscriptions_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `UserDetails` (`userid`),
+  ADD CONSTRAINT `activesubscriptions_ibfk_2` FOREIGN KEY (`subid`) REFERENCES `SubscriptionType` (`subid`);
 
 --
 -- Constraints for table `CategoryMap`
 --
 ALTER TABLE `CategoryMap`
-  ADD CONSTRAINT `categorymap_ibfk_1` FOREIGN KEY (`bookid`) REFERENCES `Books` (`bookid`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `categorymap_ibfk_2` FOREIGN KEY (`categoryid`) REFERENCES `Category` (`categoryid`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `categorymap_ibfk_1` FOREIGN KEY (`bookid`) REFERENCES `Books` (`bookid`),
+  ADD CONSTRAINT `categorymap_ibfk_2` FOREIGN KEY (`categoryid`) REFERENCES `Category` (`categoryid`);
 
 --
 -- Constraints for table `LentBooks`
 --
 ALTER TABLE `LentBooks`
-  ADD CONSTRAINT `lentbooks_ibfk_1` FOREIGN KEY (`bookid`) REFERENCES `Books` (`bookid`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `LoginDetails`
---
-ALTER TABLE `LoginDetails`
-  ADD CONSTRAINT `logindetails_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `UserDetails` (`userid`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `lentbooks_ibfk_1` FOREIGN KEY (`bookid`) REFERENCES `Books` (`bookid`),
+  ADD CONSTRAINT `lentbooks_ibfk_2` FOREIGN KEY (`userid`) REFERENCES `UserDetails` (`userid`);
 
 --
 -- Constraints for table `TotalBooks`
 --
 ALTER TABLE `TotalBooks`
   ADD CONSTRAINT `totalbooks_ibfk_1` FOREIGN KEY (`bookid`) REFERENCES `Books` (`bookid`);
+
+--
+-- Constraints for table `UserDetails`
+--
+ALTER TABLE `UserDetails`
+  ADD CONSTRAINT `userdetails_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `LoginDetails` (`userid`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
