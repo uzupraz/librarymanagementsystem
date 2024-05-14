@@ -6,13 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>User Application</title>
     <style>
         .error {
@@ -24,8 +21,9 @@
             border-color: red;
         }
     </style>
+    <link rel="stylesheet" href="style.css">
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             const submitButton = document.getElementById("submit");
             const fullName = document.getElementsByName("FullName")[0];
             const address = document.getElementsByName("Address")[0];
@@ -93,7 +91,7 @@
             dateOfBirth.addEventListener("change", updateSubmitButtonState);
             email.addEventListener("input", updateSubmitButtonState);
             password.addEventListener("input", updateSubmitButtonState);
-            isAdminCheckbox.addEventListener("change", function () {
+            isAdminCheckbox.addEventListener("change", function() {
                 document.getElementById("adminFields").style.display = this.checked ? "block" : "none";
                 updateSubmitButtonState(); // Recheck form state when admin fields toggle
                 email.value = ""; // Reset email and password fields when toggling admin status
@@ -106,80 +104,86 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-light justify-content-center fs-3 mb-5" style="background-color: #00ff5573;">
-        <button class="btn btn-primary" onclick="goBack()">Back</button>
-        User Application
-        
+    <?php include 'sidebar.php'; ?>
+    <div class="container-fluid">
 
-        <script>
-            function goBack() {
-                window.history.back();
-            }
-        </script>
+        <div class="content">
+            <nav class="navbar navbar-light justify-content-center fs-3 mb-5" style="background-color: #00ff5573;">
+                <button class="btn btn-primary" onclick="goBack()">Back</button>
+                User Application
 
-    </nav>
 
-    <div class="container">
-        <div class="text-center mb-4">
-            <p class="text-muted">Complete the below form</p>
-        </div>
+                <script>
+                    function goBack() {
+                        window.history.back();
+                    }
+                </script>
 
-        <div class="container d-flex justify-content-center">
-            <form action="add_user.php" method="post" style="width:50vw; min-width:300px;">
-                <div class="row mb-3">
-                    <div class="col">
-                        <label class="form-label">Full Name:</label>
-                        <input type="text" class="form-control" name="FullName" placeholder="John Abraham" required>
-                        <div class="error"></div>
-                    </div>
-                    <div class="col">
-                        <label class="form-label">Date of Birth:</label>
-                        <input type="date" class="form-control" name="DateOfBirth" required>
-                        <div class="error"></div>
-                    </div>
+            </nav>
+
+            <div class="container">
+                <div class="text-center mb-4">
+                    <p class="text-muted">Complete the below form</p>
                 </div>
 
-                <div class="mb-3">
-                    <label class="form-label">Address:</label>
-                    <input type="text" class="form-control" name="Address" required>
-                    <div class="error"></div>
-                </div>
+                <div class="container d-flex justify-content-center">
+                    <form action="add_user.php" method="post" style="width:50vw; min-width:300px;">
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label class="form-label">Full Name:</label>
+                                <input type="text" class="form-control" name="FullName" placeholder="John Abraham" required>
+                                <div class="error"></div>
+                            </div>
+                            <div class="col">
+                                <label class="form-label">Date of Birth:</label>
+                                <input type="date" class="form-control" name="DateOfBirth" required>
+                                <div class="error"></div>
+                            </div>
+                        </div>
 
-                <div class="form-group mb-3">
-                    <label>Gender:</label>
-                    &nbsp;
-                    <input type="radio" class="form-check-input" name="Gender" id="male" value="Male" required>
-                    <label for="male" class="form-input-label">Male</label>
-                    &nbsp;
-                    <input type="radio" class="form-check-input" name="Gender" id="female" value="Female" required>
-                    <label for="female" class="form-input-label">Female</label>
-                </div>
+                        <div class="mb-3">
+                            <label class="form-label">Address:</label>
+                            <input type="text" class="form-control" name="Address" required>
+                            <div class="error"></div>
+                        </div>
 
-                <div class="form-check mb-3">
-                    <input class="form-check-input" type="checkbox" value="1" id="IsAdmin" name="IsAdmin">
-                    <label class="form-check-label" for="IsAdmin">
-                        Is Admin
-                    </label>
-                </div>
+                        <div class="form-group mb-3">
+                            <label>Gender:</label>
+                            &nbsp;
+                            <input type="radio" class="form-check-input" name="Gender" id="male" value="Male" required>
+                            <label for="male" class="form-input-label">Male</label>
+                            &nbsp;
+                            <input type="radio" class="form-check-input" name="Gender" id="female" value="Female" required>
+                            <label for="female" class="form-input-label">Female</label>
+                        </div>
 
-                <div id="adminFields" style="display:none;">
-                    <div class="mb-3">
-                        <label class="form-label">Email:</label>
-                        <input type="email" class="form-control" name="Email">
-                        <div class="error"></div>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Password:</label>
-                        <input type="password" class="form-control" name="Password">
-                        <div class="error"></div>
-                    </div>
-                </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" value="1" id="IsAdmin" name="IsAdmin">
+                            <label class="form-check-label" for="IsAdmin">
+                                Is Admin
+                            </label>
+                        </div>
 
-                <div>
-                    <button type="submit" class="btn btn-success" id="submit" name="submit" disabled>Add</button>
-                    <a href="user_index.php" class="btn btn-danger">Cancel</a>
+                        <div id="adminFields" style="display:none;">
+                            <div class="mb-3">
+                                <label class="form-label">Email:</label>
+                                <input type="email" class="form-control" name="Email">
+                                <div class="error"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Password:</label>
+                                <input type="password" class="form-control" name="Password">
+                                <div class="error"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <button type="submit" class="btn btn-success" id="submit" name="submit" disabled>Add</button>
+                            <a href="user_index.php" class="btn btn-danger">Cancel</a>
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 
