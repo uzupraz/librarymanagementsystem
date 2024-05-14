@@ -3,23 +3,39 @@ include "connection.php";
 $id = $_GET["id"];
 
 if (isset($_POST["submit"])) {
-  $bookname = $_POST['bookname'];
-  $author = $_POST['book_author'];
-  $publisher = $_POST['publisher'];
-  $publishdate = $_POST['publishdate'];
+    $bookname = $_POST['bookname'];
+    $author = $_POST['book_author'];
+    $publisher = $_POST['publisher'];
+    $publishdate = $_POST['publishdate'];
+    $totalnumber = $_POST['totalnumber']; // Get the total number from the form
 
-  $sql = "UPDATE `books` SET `bookname`='$bookname',`author`='$author',`publisher`='$publisher',`publishdate`='$publishdate' WHERE bookid = $id";
+    // Start transaction
+    $mysqli->begin_transaction();
 
-  $result = mysqli_query($mysqli, $sql);
+    // Update the main book details
+    $sql = "UPDATE books SET bookname=?, author=?, publisher=?, publishdate=? WHERE bookid=?";
+    $stmt = $mysqli->prepare($sql);
+    $stmt->bind_param("ssssi", $bookname, $author, $publisher, $publishdate, $id);
+    $updateBooksResult = $stmt->execute();
+    $stmt->close();
 
-  if ($result) {
-    header("Location: book_index.php?msg=Data updated successfully");
-  } else {
-    echo "Failed: " . mysqli_error($mysql);
-  }
+    // Update the total number of books in totalbooks table
+    $sqlTotal = "UPDATE totalbooks SET totalnumber=? WHERE bookid=?";
+    $stmtTotal = $mysqli->prepare($sqlTotal);
+    $stmtTotal->bind_param("ii", $totalnumber, $id);
+    $updateTotalBooksResult = $stmtTotal->execute();
+    $stmtTotal->close();
+
+    if ($updateBooksResult && $updateTotalBooksResult) {
+        $mysqli->commit();
+        header("Location: book_index.php?msg=Data updated successfully");
+    } else {
+        $mysqli->rollback();
+        echo "Failed: " . mysqli_error($mysqli);
+    }
 }
-
 ?>
+
 
 
 
@@ -49,9 +65,9 @@ if (isset($_POST["submit"])) {
 
 
     <div class="content">
-    <nav class="navbar navbar-light justify-content-center fs-3 mb-5" style="background-color: #00ff5573;">
-      PHP Complete BOOKS Application
-    </nav>
+      <nav class="navbar navbar-light justify-content-center fs-3 mb-5" style="background-color: #00ff5573;">
+        PHP Complete BOOKS Application
+      </nav>
 
       <div class="text-center mb-4">
         <h3>Edit User Information</h3>
@@ -85,6 +101,17 @@ if (isset($_POST["submit"])) {
           <div class="form-group mb-3">
             <label class="form-label">Publish Date:</label>
             <input type="date" class="form-control" name="publishdate" value="<?php echo $row['publishdate'] ?>">
+          </div>
+          <?php
+$sql = "SELECT books.*, totalbooks.totalnumber FROM books
+        LEFT JOIN totalbooks ON books.bookid = totalbooks.bookid
+        WHERE books.bookid = $id LIMIT 1";
+$result = mysqli_query($mysqli, $sql);
+$row = mysqli_fetch_assoc($result);
+?>
+          <div class="form-group mb-3">
+            <label class="form-label">Total Number of Books:</label>
+            <input type="number" class="form-control" name="totalnumber" value="<?php echo isset($row['totalnumber']) ? $row['totalnumber'] : 0; ?>" min="0" required>
           </div>
           <div>
             <button type="submit" class="btn btn-success" name="submit">Update</button>
