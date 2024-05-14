@@ -1,0 +1,33 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.search-section {
+    margin-bottom: 20px;
+}
+
+.details-box {
+    background: #e9ecef;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.details-box h4 {
+    color: #495057;
+}
+
+.btn {
+    width: 100px;
+}
+
+#lendButton {
+    margin-right: 10px;
+}
