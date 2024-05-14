@@ -21,88 +21,61 @@ include "connection.php";
 </head>
 
 <body>
-  <nav class="navbar navbar-light justify-content-center fs-3 mb-5" style="background-color: #00ff5573;">
-    User Details
-    <button class="btn btn-primary" onclick="goBack()">Back</button>
-    <script>
-      function goBack() {
-        window.history.back();
-      }
-    </script>
-  </nav>
-  <div class="sidebar">
-        <div class="logo">
-            <img src="logo.png" alt="Librify Logo">
-            <h2>Librify</h2>
-        </div>
-        <button onclick="showTotalUsersPage()" class="sidebar-btn">Users</button>
-        <button onclick="TotalBooksPage()" class="sidebar-btn">Books</button>
-        <button onclick="showSubscriptionUsers()" class="sidebar-btn">Subscription User</button>
-        <button onclick="logout()" class="sidebar-btn">Logout</button>
-        
-    </div> 
-    <script>
-         function showTotalUsersPage() {
-            window.location.href = "user_index.php";
-        }
+  <?php include 'sidebar.php'; ?>
+  <div class="container-fluid">
 
-        function TotalBooksPage() {
-            window.location.href = "book_index.php";
-        }
-        function logout() {
-            window.location.href = "login.php"; // Redirect to login page
-        }
+    <div class="content">
+      <nav class="navbar navbar-light justify-content-center fs-3 mb-5" style="background-color: #00ff5573;">
+        User Details
+      </nav>
 
-        function showTotalBooks(){
-          window.location.href = "bookshow.php"
-        }
-    </script>
-  <div class="container">
-    <?php
-    if (isset($_GET["msg"])) {
-      $msg = $_GET["msg"];
-      echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-      ' . $msg . '
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>';
-    }
-    ?>
-    <a href="add_user_form.html" class="btn btn-dark mb-3">Add New</a>
-
-    <table class="table table-hover text-center">
-      <thead class="table-dark">
-        <tr>
-          <th scope="col">User ID</th>
-          <th scope="col">Full Name</th>
-          <th scope="col">DateOfBirth</th>
-          <th scope="col">Address</th>
-          <th scope="col">Gender</th>
-          <th scope="col">Action</th>
-        </tr>
-      </thead>
-      <tbody>
+      <div class="container">
         <?php
-        $sql = "SELECT * FROM `userdetails`";
-        $result = mysqli_query($mysqli, $sql);
-        while ($row = mysqli_fetch_assoc($result)) {
-        ?>
-          <tr>
-            <td><?php echo $row["userid"] ?></td>
-            <td><?php echo $row["FullName"] ?></td>
-            <td><?php echo $row["DateOfBirth"] ?></td>
-            <td><?php echo $row["Address"] ?></td>
-            <td><?php echo $row["Gender"] ?></td>
-            <td>
-              <a href="user_edit.php?id=<?php echo $row["userid"] ?>" class="link-dark"><i class="fa-solid fa-pen-to-square fs-5 me-3"></i></a>
-              <a href="user_delete.php?id=<?php echo $row["userid"] ?>" class="link-dark"><i class="fa-solid fa-trash fs-5"></i></a>
-            </td>
-          </tr>
-        <?php
+        if (isset($_GET["msg"])) {
+          $msg = $_GET["msg"];
+          echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">' . $msg . '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
         }
         ?>
-      </tbody>
-    </table>
+        <a href="add_user_form.php" class="btn btn-dark mb-3">Add New</a>
+
+        <table class="table table-hover text-center">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">User ID</th>
+              <th scope="col">Full Name</th>
+              <th scope="col">DateOfBirth</th>
+              <th scope="col">Address</th>
+              <th scope="col">Gender</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php
+            $sql = "SELECT * FROM `userdetails`";
+            $result = mysqli_query($mysqli, $sql);
+            while ($row = mysqli_fetch_assoc($result)) {
+            ?>
+              <tr>
+                <td><?php echo $row["userid"] ?></td>
+                <td><?php echo $row["FullName"] ?></td>
+                <td><?php echo $row["DateOfBirth"] ?></td>
+                <td><?php echo $row["Address"] ?></td>
+                <td><?php echo $row["Gender"] ?></td>
+                <td>
+                  <a href="user_edit.php?id=<?php echo $row["userid"] ?>" class="link-dark"><i class="fa-solid fa-pen-to-square fs-5 me-3"></i></a>
+                  <a href="user_delete.php?id=<?php echo $row["userid"] ?>" class="link-dark"><i class="fa-solid fa-trash fs-5"></i></a>
+                </td>
+              </tr>
+            <?php
+            }
+            ?>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
+
+
 
   <!-- Bootstrap -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>

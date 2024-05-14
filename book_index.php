@@ -15,48 +15,18 @@ include "connection.php";
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="a_dashboard.css">
 
   <title>PHP BOOKS Application</title>
 </head>
 
 <body>
+<?php include 'sidebar.php'; ?>
+<div class="container-fluid">
+  
+  <div class="content">
 
-    <script>
-         function showTotalUsersPage() {
-            window.location.href = "user_index.php";
-        }
 
-        function TotalBooksPage() {
-            window.location.href = "book_index.php";
-        }
-        function logout() {
-            window.location.href = "login.php"; // Redirect to login page
-        }
 
-        function showTotalBooks(){
-          window.location.href = "bookshow.php"
-        }
-    </script>
- 
-<button class="btn btn-primary" onclick="goBack()">Back</button>
-    <script>
-      function goBack() {
-        window.history.back();
-      }
-    </script>
-  <div class="container">
-  <div class="sidebar">
-        <div class="logo">
-            <img src="logo.png" alt="Librify Logo">
-            <h2>Librify</h2>
-        </div>
-        <button onclick="showTotalUsersPage()" class="sidebar-btn">Users</button>
-        <button onclick="TotalBooksPage()" class="sidebar-btn">Books</button>
-        <button onclick="showSubscriptionUsers()" class="sidebar-btn">Subscription User</button>
-        <button onclick="logout()" class="sidebar-btn">Logout</button>
-        
-    </div> 
     <?php
     if (isset($_GET["msg"])) {
       $msg = $_GET["msg"];
@@ -99,8 +69,9 @@ include "connection.php";
         ?>
       </tbody>
     </table>
-  </div>
 
+  </div>
+  </div>
   <!-- Bootstrap -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 

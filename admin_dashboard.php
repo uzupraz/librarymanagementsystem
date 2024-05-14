@@ -12,7 +12,7 @@ include 'connection.php';
   <link rel="stylesheet" href="a_dashboard.css">
 </head>
 <body>
-    <div class="sidebar">
+    <!-- <div class="sidebar">
         <div class="logo">
             <img src="logo.png" alt="Librify Logo">
             <h2>Librify</h2>
@@ -22,7 +22,8 @@ include 'connection.php';
         <button onclick="showSubscriptionUsers()" class="sidebar-btn">Subscription User</button>
         <button onclick="logout()" class="sidebar-btn">Logout</button>
         
-    </div>      
+    </div>       -->
+    <?php include 'sidebar.php'?>
     <div class="content">
         <h1>Welcome to Admin Dashboard</h1>
         <div class="line"></div>
