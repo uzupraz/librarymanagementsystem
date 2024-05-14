@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="a_dashboard.css">
+<link rel="stylesheet" href="sidebar.css">
 <!-- sidebar.php -->
 <div class="sidebar col-md-2 vh-100 wt-2">
     <div class="logo p-3 text-center border-bottom">

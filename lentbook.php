@@ -47,6 +47,7 @@ if (isset($_GET['userid']) && !empty($_GET['userid'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lent Books</title>
   <link rel="stylesheet" href="lentbook.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <h1>Currently Lent Books</h1>
