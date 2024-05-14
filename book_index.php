@@ -1,5 +1,42 @@
 <?php
 include "connection.php";
+
+function getAvailableBooks($bookid, $mysqli) {
+  $totalnumber=0;
+  $lentCount=0;
+  // Query to get the total number of books from the totalbooks table
+  $stmt = $mysqli->prepare("SELECT totalnumber FROM totalbooks WHERE bookid = ?");
+  if (!$stmt) {
+      return "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error;
+  }
+  $stmt->bind_param("i", $bookid);
+  if (!$stmt->execute()) {
+      return "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+  }
+  $stmt->bind_result($totalnumber);
+  $stmt->fetch();
+  $stmt->close();
+
+  // Query to count the number of books currently lent out with status 'lent' or 'overdue'
+  $stmt = $mysqli->prepare("SELECT COUNT(*) FROM lentbooks WHERE bookid = ? AND (status = 'lent' OR status = 'overdue')");
+  if (!$stmt) {
+      return "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error;
+  }
+  $stmt->bind_param("i", $bookid);
+  if (!$stmt->execute()) {
+      return "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+  }
+  $stmt->bind_result($lentCount);
+  $stmt->fetch();
+  $stmt->close();
+
+  // Calculate available books by subtracting the lent count from the total number
+  $availableBooks = $totalnumber - $lentCount;
+  return "$availableBooks out of $totalnumber";
+}
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -45,29 +82,36 @@ include "connection.php";
           <th scope="col">Book Author</th>
           <th scope="col">Publisher</th>
           <th scope="col">Publish Date</th>
+          <th scope="col">Available Books</th>
           <th scope="col">Action</th>
         </tr>
       </thead>
       <tbody>
-        <?php
-        $sql = "SELECT * FROM `books`";
-        $result = mysqli_query($mysqli, $sql);
-        while ($row = mysqli_fetch_assoc($result)) {
-        ?>
-          <tr>
-            <td><?php echo $row["bookname"] ?></td>
-            <td><?php echo $row["author"] ?></td>
-            <td><?php echo $row["publisher"] ?></td>
-            <td><?php echo $row["publishdate"] ?></td>
-            <td>
-              <a href="book_edit.php?id=<?php echo $row["bookid"] ?>" class="link-dark"><i class="fa-solid fa-pen-to-square fs-5 me-3"></i></a>
-              <a href="book_delete.php?id=<?php echo $row["bookid"] ?>" class="link-dark"><i class="fa-solid fa-trash fs-5"></i></a>
-            </td>
-          </tr>
-        <?php
-        }
-        ?>
-      </tbody>
+    <?php
+    $sql = "SELECT * FROM `books`";
+    $result = mysqli_query($mysqli, $sql);
+    while ($row = mysqli_fetch_assoc($result)) {
+      $availableBooks = getAvailableBooks($row["bookid"], $mysqli);
+    ?>
+      <tr>
+        <td><?php echo $row["bookname"]; ?></td>
+        <td><?php echo $row["author"]; ?></td>
+        <td><?php echo $row["publisher"]; ?></td>
+        <td><?php echo $row["publishdate"]; ?></td>
+        <td><?php echo $availableBooks; ?></td>
+        <td>
+          <a href="book_edit.php?id=<?php echo $row["bookid"]; ?>" class="link-dark">
+            <i class="fa-solid fa-pen-to-square fs-5 me-3"></i>
+          </a>
+          <a href="book_delete.php?id=<?php echo $row["bookid"]; ?>" class="link-dark">
+            <i class="fa-solid fa-trash fs-5"></i>
+          </a>
+        </td>
+      </tr>
+    <?php
+    }
+    ?>
+  </tbody>
     </table>
 
   </div>
