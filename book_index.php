@@ -57,7 +57,9 @@ function getAvailableBooks($bookid, $mysqli) {
 </head>
 
 <body>
+  <?php include 'header.php'; ?>
 <?php include 'sidebar.php'; ?>
+
 <div class="container-fluid">
   
   <div class="content">

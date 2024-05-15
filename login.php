@@ -1,3 +1,50 @@
+<?php
+session_start();
+require_once "connection.php";
+
+// Redirect to dashboard if already logged in
+if (isset($_SESSION["userid"])) {
+    header("Location: admin_dashboard.php");
+    exit();
+}
+
+// Handle form submission
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["login"])) {
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+
+    // Sanitize inputs to prevent SQL injection
+    $email = mysqli_real_escape_string($mysqli, $email);
+
+    // Prepare and execute the query
+    $stmt = $mysqli->prepare("SELECT userid, password FROM logindetails WHERE Email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $stmt->store_result();
+
+    // Check if the user exists
+    if ($stmt->num_rows > 0) {
+        $stmt->bind_result($userid, $stored_password);
+        $stmt->fetch();
+
+        // Verify the password
+        if ($password === $stored_password) {
+            // Password is correct, start session
+            $_SESSION["userid"] = $userid;
+            header("Location: admin_dashboard.php");
+            exit();
+        } else {
+            $error = "Password does not match";
+        }
+    } else {
+        $error = "Email does not match";
+    }
+
+    $stmt->close();
+}
+$mysqli->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,12 +58,12 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            color: #333; /* Set text color to dark gray */
+            color: #333;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background: linear-gradient(to bottom right, #0000, lavender); /* Gradient background */
+            background: linear-gradient(to bottom right, #0000, lavender);
         }
 
         .container {
@@ -29,53 +76,62 @@
         }
 
         .form-group {
-            margin-bottom: 15px; /* Add margin bottom to space out input groups */
+            margin-bottom: 15px;
         }
 
         input[type="email"],
         input[type="password"] {
-            width: calc(100% - 10px); /* Adjust input width to fit within container */
-            padding: 10px; /* Add padding for input fields */
-            border: 1px solid #ccc; /* Add border for input fields */
-            border-radius: 5px; /* Add border radius for rounded corners */
-            box-sizing: border-box; /* Include padding and border in input width */
+            width: calc(100% - 10px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
         }
 
         .form-btn {
-            text-align: center; /* Align button to center */
+            text-align: center;
         }
 
         .btn-primary {
-            width: 100%; /* Make the button fill the container width */
-            padding: 10px; /* Add padding for button */
-            background-color: #6a5acd; /* Add background color for button */
-            color: white; /* Set text color for button */
-            border: none; /* Remove border from button */
-            border-radius: 5px; /* Add border radius for rounded corners */
-            cursor: pointer; /* Add cursor pointer on hover */
+            width: 100%;
+            padding: 10px;
+            background-color: #6a5acd;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
 
         .btn-primary:hover {
-             background-color: #483d8b; /* DarkSlateBlue */
+            background-color: #483d8b;
         }
 
         .signup {
-            text-align: center; /* Align signup text to center */
-            margin-top: 10px; /* Add margin top for spacing */
+            text-align: center;
+            margin-top: 10px;
         }
 
         .signup a {
-            color:#483d8b; /* Set color for signup link */
-            text-decoration: none; /* Remove underline from signup link */
+            color: #483d8b;
+            text-decoration: none;
         }
 
         .signup a:hover {
-            text-decoration: underline; /* Add underline on hover for signup link */
+            text-decoration: underline;
         }
 
         h2 {
-            text-align: center; /* Align heading to center */
-            margin-bottom: 20px; /* Add margin bottom for spacing */
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .alert {
+            padding: 10px;
+            background-color: #f44336;
+            color: white;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            text-align: center;
         }
     </style>
 </head>
@@ -83,43 +139,22 @@
     <div class="container">
         <h2>Login</h2>
         
-      <form action="login.php" method="post">
-        <div class="form-group">
-            <input type="email" placeholder="Enter Email:" name="email" class="form-control">
-        </div>
-        <div class="form-group">
-            <input type="password" placeholder="Enter Password:" name="password" class="form-control">
-        </div>
-        <div class="form-btn">
-            <input type="submit" value="Login" name="login" class="btn btn-primary">
-        </div>
-      </form>
-      <?php
-        if (isset($_POST["login"])) {
-           $email = $_POST["email"];
-           $password = $_POST["password"];
-            require_once "connection.php";
-            $sql = "SELECT * FROM logindetails WHERE Email = '$email'";
-            $result = mysqli_query($mysqli, $sql);
-            $user = mysqli_fetch_assoc($result)['password'];
-
-            if ($user) {
-                if (!($password == $user)) {
-                    session_start();
-                    $_SESSION["user"] = "yes";
-                    header("Location: admin_dashboard.php");
-                    die();
-                } else {
-                    echo "<div class='alert alert-danger'>Password does not match</div>";
-                }
-                
-            }else{
-                echo "<div class='alert alert-danger'>Email does not match</div>";
-            }
+        <form action="login.php" method="post">
+            <div class="form-group">
+                <input type="email" placeholder="Enter Email" name="email" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <input type="password" placeholder="Enter Password" name="password" class="form-control" required>
+            </div>
+            <div class="form-btn">
+                <input type="submit" value="Login" name="login" class="btn btn-primary">
+            </div>
+        </form>
+        <?php
+        if (isset($error)) {
+            echo "<div class='alert'>$error</div>";
         }
         ?>
     </div>
-
-    
 </body>
 </html>

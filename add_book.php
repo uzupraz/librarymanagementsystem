@@ -1,6 +1,7 @@
 <?php
 include "connection.php";
 
+
 if (isset($_POST["submit"])) {
     $bookname = $_POST['book_name'];
     $author = $_POST['book_author'];

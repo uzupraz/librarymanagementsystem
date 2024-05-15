@@ -12,7 +12,9 @@
 </head>
 
 <body>
+    <?php include 'header.php'; ?>
     <?php include 'sidebar.php'; ?>
+
     <div class="container-fluid">
         <div class="content">
             <div class="container mt-4">

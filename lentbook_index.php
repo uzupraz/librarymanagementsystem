@@ -40,7 +40,9 @@ function getUserDetails($userid, $mysqli)
 </head>
 
 <body>
+    <?php include 'header.php'; ?>
     <?php include 'sidebar.php'; ?>
+
     <div class="content">
         <h1 class="text-center mb-4">Actively Lent Books</h1>
 
