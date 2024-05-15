@@ -152,7 +152,7 @@ $(document).ready(function () {
           alert(result.message); // Show a success/failure message
           if (result.success) {
             window.location.href =
-              "book_index.php" + "?msg=Book lent successfully";
+              "lendbook_index.php" + "?msg=Book lent successfully";
           }
         },
         error: function () {

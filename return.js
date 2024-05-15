@@ -161,7 +161,7 @@ $("#returnButton").click(function () {
                 var result = JSON.parse(response);
                 alert(result.message); // Show a success/failure message
                 if (result.success) {
-                    window.location.href = "book_index.php" + "?msg=Book returned successfully";
+                    window.location.href = "lendbook_index.php" + "?msg=Book returned successfully";
                 }
             },
             error: function () {
