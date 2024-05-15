@@ -47,7 +47,7 @@
                 </div>
 
                 <button id="lendButton" class="btn btn-success">Lend</button>
-                <button id="cancelButton" class="btn btn-danger">Cancel</button>
+                <a href="lentbook_index.php" class="btn btn-danger">Cancel</a>
             </div>
         </div>
     </div>
