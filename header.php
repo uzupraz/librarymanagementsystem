@@ -36,16 +36,16 @@
   <div class="header">
     <!-- Moved dropdown menu to the right -->
     <div class="col text-center"> <!-- Added Bootstrap class for centering -->
-      <h1 style="font-weight: 500; font-size: 24px; margin-bottom: 0;">Welcome to Admin Dashboard </h1>
+      <h1 style="font-weight: 500; font-size: 24px; margin-bottom: 0;">Library Management System</h1>
     </div> <!-- Empty div to push dropdown to the right -->
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Anushka Bhattarai
+        Prajal Tulsi
       </a>
       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-        <a class="dropdown-item" href="#">Account Settings</a>
+        <a class="dropdown-item" href="accountsettings.php">Account Settings</a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Logout</a>
+        <a class="dropdown-item" href="logout.php">Logout</a>
       </div>
     </li>
   </div>
