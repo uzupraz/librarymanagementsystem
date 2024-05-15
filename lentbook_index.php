@@ -56,10 +56,10 @@ function getUserDetails($userid, $mysqli)
         }
         ?>
         <!-- Lend and return book buttons -->
-        <div class="text-center">
+        
             <a href="lend.php" class="btn btn-success">Lend Book</a>
             <a href="return.php" class="btn btn-warning">Return Book</a>
-        </div>
+      
         <div class="container">
             <table class="table table-striped">
                 <thead>
