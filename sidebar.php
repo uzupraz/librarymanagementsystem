@@ -11,7 +11,7 @@
         <button onclick="showTotalUsersPage()" class="btn btn-outline-primary w-100">Users</button>
         <button onclick="TotalBooksPage()" class="btn btn-outline-primary w-100">Books</button>
         <button onclick="showSubscriptionUsers()" class="btn btn-outline-primary w-100">Subscription Users</button>
-        <button onclick="lentBooks()" class="btn btn-outline-danger w-100">Lent Books</button>
+        <button onclick="lentBooks()" class="btn btn-outline-primary w-100">Lent Books</button>
     </div>
 </div>
 
