@@ -16,11 +16,7 @@ if (!isset($_SESSION["userid"])) {
 </head>
 
 <body>
-    <?php include "header.php"; ?>
-    <div class="container">
-        <h1>Welcome to the Admin Dashboard</h1>
         <?php include "admin_dashboard.php"; ?>
-    </div>
 </body>
 
 </html>
