@@ -1,13 +1,29 @@
-/* body {
+body {
     background-color: black;
     color: white;
     font-family: Arial, sans-serif;
+    padding-top: 56px;
+    height:100vh;
+    display: flex;
 }
 
-.container {
-    width: 80%;
-    margin: 0 auto;
-    padding-top: 50px;
+.content {
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar{
+    height:56px;
+    top:0;
+}
+
+.navbar-fixed-top {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1030;
+    /* Ensure it sits above other content */
 }
 
 .form-group {
@@ -15,7 +31,7 @@
 }
 
 .form-control {
-    width: 100%;
+    /* width: 100%; */
     padding: 10px;
     border: none;
     border-radius: 5px;
@@ -52,4 +68,4 @@
 
 h1 {
     text-align: center;
-} */
+}

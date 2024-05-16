@@ -40,6 +40,7 @@ function getUserDetails($userid, $mysqli)
 </head>
 
 <body>
+    <div class="container-fluid">
     <?php include 'header.php'; ?>
     <?php include 'sidebar.php'; ?>
 
@@ -57,10 +58,11 @@ function getUserDetails($userid, $mysqli)
         ?>
         <!-- Lend and return book buttons -->
         
-            <a href="lend.php" class="btn btn-success">Lend Book</a>
-            <a href="return.php" class="btn btn-warning">Return Book</a>
+
       
         <div class="container">
+        <a href="lend.php" class="btn btn-success">Lend Book</a>
+            <a href="return.php" class="btn btn-warning">Return Book</a>
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -109,6 +111,7 @@ function getUserDetails($userid, $mysqli)
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    </div>
 </body>
 
 </html>

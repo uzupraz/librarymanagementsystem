@@ -4,7 +4,7 @@ require_once "connection.php";
 
 // Redirect to dashboard if already logged in
 if (isset($_SESSION["userid"])) {
-    header("Location: admin_dashboard.php");
+    header("Location: index.php");
     exit();
 }
 

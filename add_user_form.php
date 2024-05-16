@@ -21,7 +21,7 @@
             border-color: red;
         }
     </style>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const submitButton = document.getElementById("submit");

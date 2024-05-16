@@ -63,17 +63,15 @@ if (isset($_POST["submit"])) {
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-<?php include 'header.php'; ?>
-  <?php include 'sidebar.php'; ?>
+
   <div class="container-fluid">
+  <?php include 'header.php'; ?>
+  <?php include 'sidebar.php'; ?>
     <div class="content">
-      <nav class="navbar navbar-light justify-content-center fs-3 mb-5" style="background-color: #00ff5573;">
-        User Details
-      </nav>
 
       <div class="container">
         <div class="text-center mb-4">

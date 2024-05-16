@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Lend Book Operation</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="lend_styles.css"> <!-- Assuming you have a separate CSS file -->
+    <link rel="stylesheet" href="css/lend_styles.css"> <!-- Assuming you have a separate CSS file -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
@@ -55,7 +55,7 @@
     </div>
 
 
-    <script src="lend.js"></script>
+    <script src="js/lend.js"></script>
 </body>
 
 </html>
