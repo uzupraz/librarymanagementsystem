@@ -22,6 +22,87 @@
         }
     </style>
     <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <?php include 'header.php'; ?>
+        <?php include 'sidebar.php'; ?>
+
+        <div class="content">
+            <div class="container">
+                <nav class="navbar navbar-light justify-content-center fs-3 mb-5" style="background-color: #00ff5573;">
+                    User Application
+                </nav>
+
+                <div class="container">
+                    <div class="text-center mb-4">
+                        <p class="text-muted">Complete the below form</p>
+                    </div>
+
+                    <div class="container d-flex justify-content-center">
+                        <form action="add_user.php" method="post" style="width:50vw; min-width:300px;">
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <label class="form-label">Full Name:</label>
+                                    <input type="text" class="form-control" name="FullName" placeholder="John Abraham" required>
+                                    <div class="error"></div>
+                                </div>
+                                <div class="col">
+                                    <label class="form-label">Date of Birth:</label>
+                                    <input type="date" class="form-control" name="DateOfBirth" required>
+                                    <div class="error"></div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Address:</label>
+                                <input type="text" class="form-control" name="Address" required>
+                                <div class="error"></div>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label>Gender:</label>
+                                &nbsp;
+                                <input type="radio" class="form-check-input" name="Gender" id="male" value="Male" required>
+                                <label for="male" class="form-input-label">Male</label>
+                                &nbsp;
+                                <input type="radio" class="form-check-input" name="Gender" id="female" value="Female" required>
+                                <label for="female" class="form-input-label">Female</label>
+                            </div>
+
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" value="1" id="IsAdmin" name="IsAdmin">
+                                <label class="form-check-label" for="IsAdmin">
+                                    Is Admin
+                                </label>
+                            </div>
+
+                            <div id="adminFields" style="display:none;">
+                                <div class="mb-3">
+                                    <label class="form-label">Email:</label>
+                                    <input type="email" class="form-control" name="Email">
+                                    <div class="error"></div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Password:</label>
+                                    <input type="password" class="form-control" name="Password">
+                                    <div class="error"></div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <button type="submit" class="btn btn-success" id="submit" name="submit" disabled>Add</button>
+                                <a href="user_index.php" class="btn btn-danger">Cancel</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const submitButton = document.getElementById("submit");
@@ -43,10 +124,10 @@
             function calculateAge(dateOfBirth) {
                 const birthDate = new Date(dateOfBirth);
                 const today = new Date();
-                const age = today.getFullYear() - birthDate.getFullYear();
+                let age = today.getFullYear() - birthDate.getFullYear();
                 const m = today.getMonth() - birthDate.getMonth();
                 if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-                    return age - 1;
+                    age--;
                 }
                 return age;
             }
@@ -101,95 +182,6 @@
             updateSubmitButtonState(); // Initial check on page load
         });
     </script>
-</head>
-
-<body>
-    <?php include 'header.php'; ?>
-    <?php include 'sidebar.php'; ?>
-
-    <div class="container-fluid">
-
-        <div class="content">
-            <nav class="navbar navbar-light justify-content-center fs-3 mb-5" style="background-color: #00ff5573;">
-                <button class="btn btn-primary" onclick="goBack()">Back</button>
-                User Application
-
-
-                <script>
-                    function goBack() {
-                        window.history.back();
-                    }
-                </script>
-
-            </nav>
-
-            <div class="container">
-                <div class="text-center mb-4">
-                    <p class="text-muted">Complete the below form</p>
-                </div>
-
-                <div class="container d-flex justify-content-center">
-                    <form action="add_user.php" method="post" style="width:50vw; min-width:300px;">
-                        <div class="row mb-3">
-                            <div class="col">
-                                <label class="form-label">Full Name:</label>
-                                <input type="text" class="form-control" name="FullName" placeholder="John Abraham" required>
-                                <div class="error"></div>
-                            </div>
-                            <div class="col">
-                                <label class="form-label">Date of Birth:</label>
-                                <input type="date" class="form-control" name="DateOfBirth" required>
-                                <div class="error"></div>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Address:</label>
-                            <input type="text" class="form-control" name="Address" required>
-                            <div class="error"></div>
-                        </div>
-
-                        <div class="form-group mb-3">
-                            <label>Gender:</label>
-                            &nbsp;
-                            <input type="radio" class="form-check-input" name="Gender" id="male" value="Male" required>
-                            <label for="male" class="form-input-label">Male</label>
-                            &nbsp;
-                            <input type="radio" class="form-check-input" name="Gender" id="female" value="Female" required>
-                            <label for="female" class="form-input-label">Female</label>
-                        </div>
-
-                        <div class="form-check mb-3">
-                            <input class="form-check-input" type="checkbox" value="1" id="IsAdmin" name="IsAdmin">
-                            <label class="form-check-label" for="IsAdmin">
-                                Is Admin
-                            </label>
-                        </div>
-
-                        <div id="adminFields" style="display:none;">
-                            <div class="mb-3">
-                                <label class="form-label">Email:</label>
-                                <input type="email" class="form-control" name="Email">
-                                <div class="error"></div>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Password:</label>
-                                <input type="password" class="form-control" name="Password">
-                                <div class="error"></div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <button type="submit" class="btn btn-success" id="submit" name="submit" disabled>Add</button>
-                            <a href="user_index.php" class="btn btn-danger">Cancel</a>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

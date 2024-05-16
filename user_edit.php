@@ -87,10 +87,10 @@ if (isset($_POST["submit"])) {
             <div class="form-group mb-3">
               <label>Gender:</label>
               &nbsp;
-              <input type="radio" class="form-check-input" name="Gender" id="male" value="male" <?php echo ($row["Gender"] == 'male') ? "checked" : ""; ?>>
+              <input type="radio" class="form-check-input" name="Gender" id="male" value="Male" <?php echo ($row["Gender"] == 'male') ? "checked" : ""; ?>>
               <label for="male" class="form-input-label">Male</label>
               &nbsp;
-              <input type="radio" class="form-check-input" name="Gender" id="female" value="female" <?php echo ($row["Gender"] == 'female') ? "checked" : ""; ?>>
+              <input type="radio" class="form-check-input" name="Gender" id="female" value="Female" <?php echo ($row["Gender"] == 'female') ? "checked" : ""; ?>>
               <label for="female" class="form-input-label">Female</label>
             </div>
 

@@ -48,7 +48,7 @@ include "connection.php";
           </thead>
           <tbody>
             <?php
-            $sql = "SELECT * FROM `userdetails`";
+            $sql = "SELECT * FROM `userdetails` WHERE `Deleted`= 0";
             $result = mysqli_query($mysqli, $sql);
             while ($row = mysqli_fetch_assoc($result)) {
             ?>

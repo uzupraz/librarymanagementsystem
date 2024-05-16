@@ -15,7 +15,7 @@ if (isset($_POST['userid'], $_POST['bookid'])) {
         // Check if the book was overdue
         if ($overdue) {
             // Insert fine into the payments table
-            $paymentStmt = $mysqli->prepare("INSERT INTO payments (userid, amount, date, description) VALUES (?, ?, CURDATE(), 'overdue fine')");
+            $paymentStmt = $mysqli->prepare("INSERT INTO payments (userid, amount, date, description) VALUES (?, ?, CURDATE(), 'Overdue Fine')");
             $paymentStmt->bind_param("id", $userid, $fine);
 
             if ($paymentStmt->execute()) {

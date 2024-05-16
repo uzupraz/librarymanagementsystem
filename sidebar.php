@@ -9,8 +9,9 @@
         <button onclick="showDashboard()" class="btn btn-outline-primary w-100">Dashboard</button>
         <button onclick="showTotalUsersPage()" class="btn btn-outline-primary w-100">Users</button>
         <button onclick="TotalBooksPage()" class="btn btn-outline-primary w-100">Books</button>
-        <button onclick="showSubscriptionUsers()" class="btn btn-outline-primary w-100">Subscription Users</button>
-        <button onclick="lentBooks()" class="btn btn-outline-primary w-100">Lent Books</button>
+        <button onclick="showSubscriptionUsers()" class="btn btn-outline-primary w-100">Subscribed Users</button>
+        <button onclick="showLentBooks()" class="btn btn-outline-primary w-100">Lent Books</button>
+        <button onclick="showPayment()" class="btn btn-outline-primary w-100">Payments</button>
     </div>
 </div>
 
@@ -31,7 +32,11 @@
         window.location.href = "subscriptions_index.php"; // Ensure this points to the correct PHP file for subscription users
     }
 
-    function lentBooks() {
+    function showLentBooks() {
         window.location.href = "lentbook_index.php"; // Redirect to login page
+    }
+
+    function showPayment() {
+        window.location.href = "payments_index.php"; // Redirect to login page
     }
 </script>
