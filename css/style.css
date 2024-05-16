@@ -1,14 +1,22 @@
 body {
-    background-color: black;
-    color: white;
+    background-color: rgb(240, 240, 240);
+    color: black;
     font-family: Arial, sans-serif;
-    padding-top: 56px;
     height:100vh;
     display: flex;
+    padding-top: 56px;
+}
+
+.container-fluid{
+    display: flex;
+    width:100%
+    margin:0px;
+    padding:0px;
 }
 
 .content {
     padding: 20px;
+    width:100%;
     justify-content: center;
     align-items: center;
 }
@@ -17,6 +25,7 @@ body {
     height:56px;
     top:0;
 }
+
 
 .navbar-fixed-top {
     position: fixed;

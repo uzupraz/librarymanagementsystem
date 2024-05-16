@@ -1,0 +1,49 @@
+.sidebar {
+    height: 100vh;
+    background-color: #e2f9fe;
+    /* Light blue background */
+    padding: 20px 40px;
+    /* Increase left padding to move logo to the right */
+    position: fixed;
+    /* Fixed positioning */
+    left: 0;
+    /* Align to the left */
+    top: 0;
+    /* Align to the top */
+}
+
+.sidebar-logo {
+    margin-bottom: 20px;
+    margin-left: 30px;
+}
+
+.sidebar-logo img {
+    max-width: 100px;
+    max-height: 100px;
+}
+
+.librify-name {
+    font-size: 16px;
+    color: #333;
+    /* Dark gray color */
+    text-align: center;
+}
+
+.btn-group-vertical {
+    margin-top: 20px;
+    /* Add space between logo and buttons */
+}
+
+.btn {
+    background-color: #50dbfe;
+    /* Blue button color */
+    color: #fff;
+    /* White text color */
+    margin-bottom: 40px;
+    /* Add more space between buttons */
+}
+
+.btn:hover {
+    background-color: #0056b3;
+    /* Darker blue color on hover */
+}

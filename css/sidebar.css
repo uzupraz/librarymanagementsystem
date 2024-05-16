@@ -1,49 +1,53 @@
 .sidebar {
-    height: 100vh;
-    background-color: #e2f9fe;
-    /* Light blue background */
-    padding: 20px 40px;
-    /* Increase left padding to move logo to the right */
-    position: fixed;
-    /* Fixed positioning */
-    left: 0;
-    /* Align to the left */
-    top: 0;
-    /* Align to the top */
+    width: 250px; /* Set a fixed width for the sidebar */
+    background-color: #f0f8ff; /* Light blue background */
+    padding: 20px; /* Padding on all sides */
+    left: 0; /* Align to the left */
+    top: 0; /* Align to the top */
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1); /* Add a subtle shadow */
+    justify-content: space-between; /* Distribute space between logo and buttons */
 }
 
 .sidebar-logo {
+    text-align: center; /* Center the logo */
     margin-bottom: 20px;
-    margin-left: 30px;
 }
 
 .sidebar-logo img {
-    max-width: 100px;
-    max-height: 100px;
+    max-width: 80px; /* Adjusted width for better fit */
+    max-height: 80px; /* Adjusted height for better fit */
+    border-radius: 50%; /* Make the logo circular */
 }
 
 .librify-name {
-    font-size: 16px;
-    color: #333;
-    /* Dark gray color */
+    font-size: 20px; /* Increased font size */
+    color: #333; /* Dark gray color */
     text-align: center;
+    font-weight: bold; /* Make the text bold */
+    margin-top: 10px; /* Add some space above the text */
 }
 
-.btn-group-vertical {
-    margin-top: 20px;
-    /* Add space between logo and buttons */
+.sidebar .btn-group-vertical {
+    width: 100%; /* Make the buttons take the full width */
+    margin-top: 40px; /* Add space between logo and buttons */
 }
 
-.btn {
-    background-color: #50dbfe;
-    /* Blue button color */
-    color: #fff;
-    /* White text color */
-    margin-bottom: 40px;
-    /* Add more space between buttons */
+.sidebar .btn {
+    background-color: #506afe; /* Blue button color */
+    color: #fff; /* White text color */
+    margin-bottom: 20px; /* Space between buttons */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 15px; /* Add padding for better appearance */
+    font-size: 16px; /* Increase font size */
+    text-align: left; /* Align text to the left */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
 }
 
-.btn:hover {
-    background-color: #0056b3;
-    /* Darker blue color on hover */
+.sidebar .btn:hover {
+    background-color: #1e90ff; /* Darker blue color on hover */
+}
+
+.sidebar .btn i {
+    margin-right: 10px; /* Space between icon and text */
 }
