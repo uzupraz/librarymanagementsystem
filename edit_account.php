@@ -34,7 +34,7 @@ if (isset($_POST["submit"])) {
     $stmt->execute();
 
     if ($stmt->affected_rows > 0) {
-      header("Location: user_index.php?msg=Data updated successfully");
+      header("Location: index.php?msg=Data updated successfully");
       exit();
     } else {
       echo "Failed to update data.";
