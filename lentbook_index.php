@@ -61,10 +61,11 @@ function getUserDetails($userid, $mysqli)
 
       
         <div class="container">
-        <a href="lend.php" class="btn btn-success">Lend Book</a>
-            <a href="return.php" class="btn btn-warning">Return Book</a>
-            <table class="table table-striped">
-                <thead>
+            <a href="lend.php" class="btn btn-success mb-3">Lend Book</a>
+            <a href="return.php" class="btn btn-warning mb-3">Return Book</a>
+
+            <table class="table text-center">
+                <thead class="table-dark">
                     <tr>
                         <th scope="col">User Name</th>
                         <th scope="col">Book Name</th>

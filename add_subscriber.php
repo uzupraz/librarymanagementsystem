@@ -53,6 +53,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         }
                         $stmt2->close();
                     }
+
+                    
                 }
                 $stmt->close();
             }

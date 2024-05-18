@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="css/sidebar.css">
 <!-- sidebar.php -->
-<div class="sidebar col-md-2 vh-100 wt-2 bg-light">
+<div class="sidebar col-md-2 vh-100 wt-2">
     <div class="logo p-3 text-center border-bottom">
         <img src="img/logo.png" alt="Librify Logo" class="img-fluid" style="max-width: 80px;">
         <h2 class="h5">Librify</h2>

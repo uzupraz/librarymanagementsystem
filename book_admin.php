@@ -47,23 +47,58 @@
 
          return true;
       }
+
+      document.addEventListener("DOMContentLoaded", function() {
+         const categoryInput = document.getElementById("categories");
+         const categoryList = document.getElementById("categoryList");
+
+         // Fetch existing categories from the database
+         fetch("get_categories.php")
+            .then(response => response.json())
+            .then(data => {
+               data.forEach(category => {
+                  const option = document.createElement("option");
+                  option.value = category.categoryname;
+                  categoryList.appendChild(option);
+               });
+            })
+            .catch(error => console.error("Error fetching categories:", error));
+
+         categoryInput.addEventListener("input", function() {
+            const inputValue = categoryInput.value;
+            const lastCommaIndex = inputValue.lastIndexOf(",");
+            const currentInput = inputValue.substring(lastCommaIndex + 1).trim();
+
+            categoryList.innerHTML = ""; // Clear current suggestions
+
+            // Fetch existing categories from the database again
+            fetch("get_categories.php")
+               .then(response => response.json())
+               .then(data => {
+                  data.forEach(category => {
+                     if (category.categoryname.toLowerCase().startsWith(currentInput.toLowerCase())) {
+                        const option = document.createElement("option");
+                        option.value = category.categoryname;
+                        categoryList.appendChild(option);
+                     }
+                  });
+               })
+               .catch(error => console.error("Error fetching categories:", error));
+         });
+      });
    </script>
-
-
 </head>
 
 <body>
 
-   <?php include 'header.php'; ?>
-   <?php include 'sidebar.php'; ?>
-
    <div class="container-fluid">
+      <?php include 'header.php'; ?>
+      <?php include 'sidebar.php'; ?>
 
       <div class="content">
 
          <div class="text-center mb-4" style="background-color: #00ff5573;">
             <h3>Add Book</h3>
-            <!-- <p class="text-muted">Complete the form below to add a book</p> -->
          </div>
 
          <div class="container justify-content-center">
@@ -93,6 +128,11 @@
                   <input type="number" class="form-control" name="number_of_books" value="1" min="1" required>
                </div>
 
+               <div class="form-group mb-3">
+                  <label class="form-label">Categories:</label>
+                  <input type="text" class="form-control" name="categories" id="categories" list="categoryList" placeholder="Enter categories separated by commas" required>
+                  <datalist id="categoryList"></datalist>
+               </div>
 
                <div>
                   <button type="submit" class="btn btn-success" name="submit">Save</button>

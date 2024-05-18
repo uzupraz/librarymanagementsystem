@@ -34,7 +34,7 @@ $stmt->close();
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <header class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #a1abd3;">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Library Management System</a>
             <div class="dropdown ms-auto">

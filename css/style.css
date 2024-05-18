@@ -1,29 +1,30 @@
 body {
-    background-color: rgb(240, 240, 240);
+    background-color: #e4e8ff;
     color: black;
     font-family: Arial, sans-serif;
-    height:100vh;
+    height: 100vh;
     display: flex;
     padding-top: 56px;
 }
 
-.container-fluid{
+.container-fluid {
     display: flex;
-    width:100%;
-    margin:0px;
-    padding:0px;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
 }
 
 .content {
     padding: 20px;
-    width:100%;
+    width: 100%;
     justify-content: center;
     align-items: center;
+    margin-left: 250px;
 }
 
-.navbar{
-    height:56px;
-    top:0;
+.navbar {
+    height: 56px;
+    top: 0;
     padding-left: 20px;
     padding-right: 20px;
 }
@@ -81,7 +82,124 @@ h1 {
     text-align: center;
 }
 
-.avatar{
+.avatar {
     height: 30px;
-    width:30px;
+    width: 30px;
+}
+
+.table {
+    width: 100%;
+    margin: 0 auto;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    background-color: #f9f9f9;
+}
+
+.table thead {
+    background: linear-gradient(45deg, #007bff, #0056b3);
+    color: white;
+    text-align: left;
+}
+
+.table th {
+    padding: 15px;
+    font-weight: 600;
+}
+
+.table td {
+    padding: 15px;
+    border-bottom: 1px solid #dee2e6;
+    text-align: left;
+}
+
+.table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.table .link-dark {
+    color: #343a40;
+    transition: color 0.3s ease;
+}
+
+.table .link-dark:hover {
+    color: #0056b3;
+}
+
+.activity-log-container {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 30px;
+    background-color: #c8ceee;
+}
+
+.activity-log-header {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.activity-log .d-flex {
+    flex-direction: column;
+}
+
+.activity-log .stat-box {
+    background-color: #dcdcdc;
+    width: 100%;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.activity-log .stat-box .summary {
+    flex-grow: 1;
+}
+
+.activity-log .stat-box .date {
+    text-align: right;
+    font-size: 0.9em;
+    color: #555;
+}
+
+/* Adjust table for smaller screens */
+@media (max-width: 768px) {
+    .table thead {
+        display: none;
+    }
+
+    .table,
+    .table tbody,
+    .table tr,
+    .table td {
+        display: block;
+        width: 100%;
+    }
+
+    .table tr {
+        margin-bottom: 15px;
+    }
+
+    .table td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+    }
+
+    .table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 50%;
+        padding-left: 15px;
+        font-weight: bold;
+        text-align: left;
+    }
 }

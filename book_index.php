@@ -36,8 +36,25 @@ function getAvailableBooks($bookid, $mysqli)
   return "$availableBooks out of $totalnumber";
 }
 
+function getBookCategories($bookid, $mysqli)
+{
+  $categories = [];
+  $stmt = $mysqli->prepare("SELECT category.categoryname FROM categorymap JOIN category ON categorymap.categoryid = category.categoryid WHERE categorymap.bookid = ?");
+  if (!$stmt) {
+    return "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error;
+  }
+  $stmt->bind_param("i", $bookid);
+  if (!$stmt->execute()) {
+    return "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+  }
+  $result = $stmt->get_result();
+  while ($row = $result->fetch_assoc()) {
+    $categories[] = $row['categoryname'];
+  }
+  $stmt->close();
 
-
+  return implode(', ', $categories);
+}
 ?>
 
 <!DOCTYPE html>
@@ -78,6 +95,7 @@ function getAvailableBooks($bookid, $mysqli)
               <th scope="col">Publisher</th>
               <th scope="col">Publish Date</th>
               <th scope="col">Available Books</th>
+              <th scope="col">Categories</th>
               <th scope="col">Action</th>
             </tr>
           </thead>
@@ -87,6 +105,7 @@ function getAvailableBooks($bookid, $mysqli)
             $result = mysqli_query($mysqli, $sql);
             while ($row = mysqli_fetch_assoc($result)) {
               $availableBooks = getAvailableBooks($row["bookid"], $mysqli);
+              $categories = getBookCategories($row["bookid"], $mysqli);
             ?>
               <tr>
                 <td><?php echo $row["bookname"]; ?></td>
@@ -94,6 +113,7 @@ function getAvailableBooks($bookid, $mysqli)
                 <td><?php echo $row["publisher"]; ?></td>
                 <td><?php echo $row["publishdate"]; ?></td>
                 <td><?php echo $availableBooks; ?></td>
+                <td><?php echo $categories; ?></td>
                 <td>
                   <a href="book_edit.php?id=<?php echo $row["bookid"]; ?>" class="link-dark">
                     <i class="fa-solid fa-pen-to-square fs-5 me-3"></i>

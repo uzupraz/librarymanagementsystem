@@ -1,9 +1,11 @@
 .sidebar {
     width: 250px; /* Set a fixed width for the sidebar */
-    background-color: #f0f8ff; /* Light blue background */
+    background-color: #a1abd3; /* Light blue background */
     padding: 20px; /* Padding on all sides */
     left: 0; /* Align to the left */
-    top: 0; /* Align to the top */
+    top: 56px; /* Align to the top */
+    position: fixed;
+    overflow: hidden;
     box-shadow: 2px 0 5px rgba(0,0,0,0.1); /* Add a subtle shadow */
     justify-content: space-between; /* Distribute space between logo and buttons */
 }

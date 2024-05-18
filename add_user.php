@@ -7,21 +7,17 @@ if (isset($_POST["submit"])) {
     $address = $_POST['Address'];
     $gender = $_POST['Gender'];
     $isAdmin = isset($_POST['IsAdmin']) && $_POST['IsAdmin'] == 1;
-    
-
 
     // SQL query to insert into userdetails
-    $sqlUserDetails = "INSERT INTO `UserDetails` (`FullName`, `Address`, `DateOfBirth`, `Gender`) VALUES (?, ?, ?, ?)";
+    $sqlUserDetails = "INSERT INTO `userdetails` (`FullName`, `Address`, `DateOfBirth`, `Gender`) VALUES (?, ?, ?, ?)";
     $stmt = $mysqli->prepare($sqlUserDetails);
     $stmt->bind_param("ssss", $fullName, $address, $dateOfBirth, $gender);
 
-
-
     if ($stmt->execute()) {
+        $lastUserId = $mysqli->insert_id; // Get last inserted ID from userdetails
 
         // Check if 'Is Admin' is checked
         if ($isAdmin) {
-            $lastUserId = $mysqli->insert_id; // Get last inserted ID from userdetails
             $email = $_POST['Email'];
             $password = $_POST['Password'];
 
@@ -31,6 +27,21 @@ if (isset($_POST["submit"])) {
             $stmt->bind_param("iss", $lastUserId, $email, $password);
 
             if ($stmt->execute()) {
+                // Update userdetails to set isAdmin to 1
+                $sqlUpdateAdmin = "UPDATE `userdetails` SET `Admin` = 1 WHERE `userid` = ?";
+                $stmtUpdateAdmin = $mysqli->prepare($sqlUpdateAdmin);
+                $stmtUpdateAdmin->bind_param("i", $lastUserId);
+                $stmtUpdateAdmin->execute();
+                $stmtUpdateAdmin->close();
+
+                // Add log entry for new admin
+                $logSummary = "New Admin registered ($fullName)";
+                $sqlLog = "INSERT INTO `logs` (`summary`) VALUES (?)";
+                $stmtLog = $mysqli->prepare($sqlLog);
+                $stmtLog->bind_param("s", $logSummary);
+                $stmtLog->execute();
+                $stmtLog->close();
+
                 header("Location: user_index.php?msg=Admin record created successfully");
             } else {
                 echo "Failed to insert admin details: " . $mysqli->error;
