@@ -65,7 +65,7 @@
     }
 
     function showActiveSubscriptions() {
-      window.location.href = "subscriptions.php";
+      window.location.href = "subscriptions_index.php";
     }
 
     function showTotalLentBooks() {

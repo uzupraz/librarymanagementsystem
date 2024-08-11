@@ -43,8 +43,6 @@
                     <p><strong>Full Name:</strong> <span id="user_fullname">N/A</span></p>
                     <p><strong>Address:</strong> <span id="user_address">N/A</span></p>
                     <p><strong>Gender:</strong> <span id="user_gender">N/A</span></p>
-                    <p><strong>Subscription Status:</strong> <span id="user_subscription">N/A</span></p>
-                    <p><strong>Currently Lent:</strong> <span id="user_lent">N/A</span></p>
                 </div>
 
                 <div id="lent_details" class="details-box">
